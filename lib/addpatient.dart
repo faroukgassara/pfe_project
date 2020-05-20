@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:string_validator/string_validator.dart';
 import 'package:intl/intl.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 class Addpatient extends StatefulWidget {
   @override
@@ -33,7 +34,6 @@ class _AddpatientState extends State<Addpatient> {
     right:isColapsed ? 0: -0.35*screenWidth,
     child:Material(
       animationDuration: duration,
-      //borderRadius: BorderRadius.all(Radius.circular(100)),
       child: Scaffold(
         appBar: _getAppBar(),
         backgroundColor: Colors.white, 
@@ -164,9 +164,9 @@ class _AddpatientState extends State<Addpatient> {
                     begin: Alignment.centerLeft,
                     end: Alignment.centerRight,
                     colors: [
-                    Colors.tealAccent,
-                    Colors.redAccent,
-                ]
+                      Hexcolor("#50d5b7"),
+                      Hexcolor("#067d68"),
+                  ]
 
                   ),
                   borderRadius: BorderRadius.circular(30.0)
@@ -225,9 +225,9 @@ _getAppBar(){
         gradient: LinearGradient(
           begin: Alignment.centerLeft,
           end: Alignment.centerRight,
-          colors: [
-            Colors.tealAccent,
-            Colors.redAccent,
+          colors: [ 
+            Hexcolor("#067d68"),
+            Hexcolor("#50d5b7"),
           ],
         ),
       ),
@@ -237,7 +237,7 @@ _getAppBar(){
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                      InkWell(child:Icon(Icons.menu,color:Colors.redAccent), onTap: (){
+                      InkWell(child:Icon(Icons.menu,color:Hexcolor("#50d5b7")), onTap: (){
                         setState(() {
                           isColapsed = !isColapsed;
                         });
@@ -248,13 +248,13 @@ _getAppBar(){
                             'Add Patient',
                             style:TextStyle(
                               fontSize: 20,
-                              color: Colors.lightBlue[100],
+                              color: Colors.white,
 
                             ) ,
                           ),
                         ],
                       ),
-                      Icon(Icons.settings,color:Colors.tealAccent),
+                      Icon(Icons.settings,color:Hexcolor("#067d68")),
                     ],
                   ),
       ),

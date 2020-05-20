@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:pfe_project/addpatient.dart';
 import 'package:pfe_project/test2.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 class MenuDashboardPage extends StatefulWidget {
   @override
@@ -12,12 +13,12 @@ class _MenuDashboardPageState extends State<MenuDashboardPage> {
   Items item1 = new Items(
       title: "Add Patient ",
       subtitle: "addpatient",
-      img: "images/addpatienticon.png");
+      img: "images/addpatient.png");
 
   Items item2 = new Items(
     title: "Calendar",
     subtitle: "calendar",
-    img: "images/calicon.png",
+    img: "images/agenda.png",
   );
   Items item3 = new Items(
     title: "Appointment",
@@ -57,7 +58,7 @@ class _MenuDashboardPageState extends State<MenuDashboardPage> {
         children: myList.map((data){
           return Container(
             decoration: BoxDecoration(
-                  color: Colors.tealAccent[100], 
+                  color: Hexcolor("#1c9780"),
                   borderRadius: BorderRadius.circular(30)),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -71,9 +72,8 @@ class _MenuDashboardPageState extends State<MenuDashboardPage> {
                   ),
                   InkWell(child: Text(data.title,
                     style: TextStyle(
-                      color:Colors.redAccent,
+                      color:Colors.white,
                     ),
-                  
                   ),
                   onTap: (){
                     if(data.subtitle=='addpatient'){
@@ -81,10 +81,11 @@ class _MenuDashboardPageState extends State<MenuDashboardPage> {
                       context,
                       MaterialPageRoute(builder: (context) =>
                         Scaffold(
-                          body:Stack(children:<Widget>[clippath(context),_getNavBar(context),menu(context),
-                          
-                          Addpatient()]),
-                    
+                          body:Stack(children:<Widget>[
+                            clippath(context),
+                            _getNavBar(context),
+                            menu(context),
+                            Addpatient()]),
                         ),
                       ),
                     );
@@ -93,16 +94,16 @@ class _MenuDashboardPageState extends State<MenuDashboardPage> {
                       context,
                       MaterialPageRoute(builder: (context) =>
                         Scaffold(
-                          body:Stack(children:<Widget>[clippath(context),_getNavBar(context),menu(context),
-                          
-                          Test2()]),
-                    
+                          body:Stack(children:<Widget>[
+                            clippath(context),
+                            _getNavBar(context),
+                            menu(context),
+                            Test2()]),
                         ),
                       ),
                     );
                     }
                   },),
-                  
                 ],
               ),
           );
@@ -123,20 +124,14 @@ class _MenuDashboardPageState extends State<MenuDashboardPage> {
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                     colors: [
-                    Colors.tealAccent,
-                    Colors.redAccent,
+                      Hexcolor("#50d5b7"),
+                      Hexcolor("#067d68"),
                 ])),
-              //child: Center(
-                //child: Text('Hello'),
-              //),
             ),
           ),
         ],
       ),
-
     );
-
-
   }
 }
 class Items {
@@ -151,11 +146,10 @@ class MyClipper extends CustomClipper<Path>{
     Path path = Path();
     path.lineTo(0, size.height);
     path.quadraticBezierTo(size.width/4, size.height
- - 80, size.width/2, size.height-40);
+    - 80, size.width/2, size.height-40);
     path.quadraticBezierTo(3/4*size.width, size.height,
- size.width, size.height-30);
+    size.width, size.height-30);
     path.lineTo(size.width, 0);
-
     return path;
   }
 
@@ -163,7 +157,6 @@ class MyClipper extends CustomClipper<Path>{
   bool shouldReclip(CustomClipper<Path> oldClipper) {
     return true;
   }
-
 }
 _getNavBar(context) {
   return Stack(
@@ -180,9 +173,8 @@ _getNavBar(context) {
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                     colors: [
-                  
-                  Colors.redAccent,
-                  Colors.tealAccent,
+                      Hexcolor("#50d5b7"),
+                      Hexcolor("#067d68"),
                 ])),
           ),
         ),
@@ -209,14 +201,14 @@ _getNavBar(context) {
           children: <Widget>[
             Text('Focus',
                 style: TextStyle(
-                    color: Colors.redAccent,
+                    color: Colors.white,
                     fontWeight: FontWeight.w500)),
             SizedBox(
               width: 1,
             ),
             Text('Relax',
                 style: TextStyle(
-                    color: Colors.redAccent,
+                    color: Colors.white,
                     fontWeight: FontWeight.w500)),
             SizedBox(width: 100),
             
@@ -230,14 +222,14 @@ _getNavBar(context) {
 _buildNavItem(IconData icon) {
   return CircleAvatar(
     radius: 30,
-    backgroundColor: Colors.tealAccent[400],
+    backgroundColor:Hexcolor("#50d5b7"),
     child: CircleAvatar(
       radius: 25,
       backgroundColor:
           Colors.white,
       child: Icon(
         icon,
-        color:Colors.black,
+        color:Hexcolor("#067d68"),
       ),
     ),
   );
