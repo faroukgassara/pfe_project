@@ -173,8 +173,8 @@ _getNavBar(context) {
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                     colors: [
-                      Hexcolor("#50d5b7"),
                       Hexcolor("#067d68"),
+                      Hexcolor("#50d5b7"),
                 ])),
           ),
         ),
