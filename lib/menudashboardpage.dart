@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:pfe_project/addpatient.dart';
+import 'package:pfe_project/calendar.dart';
 import 'package:pfe_project/test2.dart';
 import 'package:hexcolor/hexcolor.dart';
 
@@ -98,7 +99,7 @@ class _MenuDashboardPageState extends State<MenuDashboardPage> {
                             clippath(context),
                             _getNavBar(context),
                             menu(context),
-                            Test2()]),
+                            Calendar()]),
                         ),
                       ),
                     );

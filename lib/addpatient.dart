@@ -9,15 +9,13 @@ class Addpatient extends StatefulWidget {
 }
 
 class _AddpatientState extends State<Addpatient> {
+
   final _formKey = GlobalKey<FormState>();
   int _currentStep = 0 ; 
   bool isColapsed = true ; 
   double screenWidth,screenHeight;
   final Duration duration = const Duration(milliseconds:300);
   DateTime _dateTime;
-
-  
-  
   var myFormat = DateFormat('d-MM-yyyy');
   String selected;
 

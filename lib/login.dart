@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:pfe_project/Animations/BouncyAnimation.dart';
 import 'package:pfe_project/Animations/FadeAnimation.dart';
 import 'package:pfe_project/addpatient.dart';
 import 'package:pfe_project/menudashboardpage.dart';
@@ -81,7 +82,7 @@ class _LoginState extends State<Login> {
           top:60,
           child: Container(
             child: Text(
-              "Login",
+              "LOGIN",
                style:TextStyle(
                 color:Colors.white,
                 fontSize:70,
@@ -181,7 +182,9 @@ class _LoginState extends State<Login> {
                       onTap: (){
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => MenuDashboardPage()),
+                          Bouncy(
+                            widget: MenuDashboardPage()
+                          ),
                         );
                       },
                       child: Container(
@@ -204,7 +207,6 @@ class _LoginState extends State<Login> {
                 ],
               ),
             ),
-        
         ],
       ),
     );
