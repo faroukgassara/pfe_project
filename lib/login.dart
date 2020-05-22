@@ -11,8 +11,11 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-
+  bool passwordVisible ;
   @override
+    void initState() {
+      passwordVisible = true;
+    }
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
@@ -74,15 +77,16 @@ class _LoginState extends State<Login> {
 
         
         Positioned(
-          left: 150,
-          top:100,
+          left: 180,
+          top:60,
           child: Container(
             child: Text(
               "Login",
                style:TextStyle(
                 color:Colors.white,
-                fontSize:40,
+                fontSize:70,
                 fontWeight:FontWeight.bold,
+                fontFamily: 'Anton',
               ),
             ),
           ),
@@ -112,13 +116,21 @@ class _LoginState extends State<Login> {
 	                    children: <Widget>[
 	                      Container(
 	                        padding: EdgeInsets.all(8.0),
-	                        decoration: BoxDecoration(
-	                          border: Border(bottom: BorderSide(color: Colors.grey[100]))
-	                        ),
 	                        child: TextField(
 	                          decoration: InputDecoration(
-	                            border: InputBorder.none,
-	                            hintText: "id",
+	                            enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: BorderSide(color:Hexcolor("#067d68"), width: 1.0),
+                              ),
+                              prefixIcon: Padding(
+                                padding: EdgeInsets.all(0.0),
+                                child: Icon(
+                                  Icons.person,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                              hintText: "id",
+                              labelText: "id",
 	                            hintStyle: TextStyle(color: Colors.grey)
 	                          ),
 	                        ),
@@ -126,10 +138,36 @@ class _LoginState extends State<Login> {
 	                      Container(
 	                        padding: EdgeInsets.all(8.0),
 	                        child: TextField(
+                            obscureText: passwordVisible,
 	                          decoration: InputDecoration(
-	                            border: InputBorder.none,
+	                            enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: BorderSide(color:Hexcolor("#067d68"), width: 1.0),
+                              ),
+                              prefixIcon: Padding(
+                                padding: EdgeInsets.all(0.0),
+                                child: Icon(
+                                  Icons.lock,
+                                  color: Colors.grey,
+                                ),
+                              ),
 	                            hintText: "Password",
-	                            hintStyle: TextStyle(color: Colors.grey)
+                              labelText: "Password",
+	                            hintStyle: TextStyle(color: Colors.grey),
+                              suffixIcon: IconButton(
+                                icon: Icon(
+                                  passwordVisible
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
+                                  color: Colors.grey,
+                                ), 
+                                onPressed:(){
+                                  setState(() {
+                                    passwordVisible = !passwordVisible;
+                                });
+                                } ,
+                              ),
+                              
 	                          ),
 	                        ),
 	                      ),
