@@ -19,6 +19,30 @@ class _AddpatientState extends State<Addpatient> {
   var myFormat = DateFormat('d-MM-yyyy');
   String selected;
 
+  Future<Null> _selectDate(BuildContext context) async{
+    DateTime _datePicker = await showDatePicker(
+      context: context, 
+      initialDate: DateTime.now(), 
+      firstDate: DateTime(1950), 
+      lastDate: DateTime(2021),
+      builder: (BuildContext context ,Widget child){
+        return Theme(
+          data: ThemeData(
+            primarySwatch:Colors.blue,
+          ),
+          child: child,
+        );
+      },
+    );
+    if(_datePicker != Null && _datePicker != _dateTime){
+      setState(() {
+        _dateTime = _datePicker;
+        print(_dateTime.toString());
+      });
+    }
+                    
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -136,53 +160,36 @@ class _AddpatientState extends State<Addpatient> {
         isActive: _currentStep>=0,
         content:Column(
             children: <Widget>[
-              Text(
-                _dateTime == null ? 'Nothing Has Been Picked Yet':myFormat.format(_dateTime).toString(),
-                style: TextStyle(fontSize:20),
-              ),
-              SizedBox(height:10),
-              RaisedButton(
-                onPressed: (){
-                  showDatePicker(
-                    context: context, 
-                    initialDate: DateTime.now(), 
-                    firstDate: DateTime(1950), 
-                    lastDate: DateTime(2021),
-                  ).then((date){
-                    setState(() {
-                      _dateTime=date;
-                    });
+              Padding(
+                padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+                child: TextField(
+                  readOnly: true,
+                onTap: (){
+                  setState(() {
+                    _selectDate(context);
                   });
                 },
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(80.0)),
-                padding: EdgeInsets.all(0.0),
-                child: Ink(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                    begin: Alignment.centerLeft,
-                    end: Alignment.centerRight,
-                    colors: [
-                      Hexcolor("#50d5b7"),
-                      Hexcolor("#067d68"),
-                  ]
-
-                  ),
-                  borderRadius: BorderRadius.circular(30.0)
-                ),
-                child: Container(
-                  constraints: BoxConstraints(maxWidth: 300.0, minHeight: 50.0),
-                  alignment: Alignment.center,
-                  child: Text(
-                    "Age",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Colors.white
+	              decoration: InputDecoration(
+	                 enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide(color:Hexcolor("#067d68"), width: 1.0),
                     ),
-                  
-                  ),
-                ),
-                ),
+                    prefixIcon: Padding(
+                      padding: EdgeInsets.all(0.0),
+                      child: Icon(
+                        Icons.date_range,
+                        color: Colors.grey,
+                      ),
+                    ),
+                    labelText: "Date",
+                    hintText: _dateTime == null ? 'Nothing Has Been Picked Yet':myFormat.format(_dateTime).toString(),
+	                  hintStyle: TextStyle(color: Colors.grey),
+                    labelStyle: TextStyle(color: Colors.grey),
+	              ),
+	            ),
               ),
+              
+              
             ],
         ), 
       ),
