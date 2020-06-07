@@ -32,10 +32,10 @@ class _HomePageState extends State<HomePage> {
   
     
   getUsers() async{
-    var response = await http.get(_localhost());
+    var response = await http.get('http://10.0.3.2:5000');
     
     data = json.decode(response.body);
-    debugPrint(response.body);
+    debugPrint('response.body');
     setState(() {
       usersData = data["users"];
     });
@@ -55,7 +55,7 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     getUsers();
   }
-  //usersData == null ? 0 :
+  
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +64,7 @@ class _HomePageState extends State<HomePage> {
         title: Text('Flutter listview with json'),
       ),
       body: ListView.builder(
-        itemCount:  usersData.length,
+        itemCount:usersData == null ? 0 :  usersData.length,
         itemBuilder: (BuildContext context, int index) {
           return Card(
             child: Padding(
