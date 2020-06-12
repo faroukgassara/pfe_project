@@ -12,8 +12,8 @@ class Patient with ChangeNotifier   {
 
   factory Patient.formJson(Map <String, dynamic> json){
     return new Patient(
-       idpatient: json['idpatient'],
        nom: json['nom'],
+       idpatient: json['idpatient'],
        prenom: json['prenom'],
        sex: json['sex'],
        statusmatriomo_id: json['statusmatriomo_id'],

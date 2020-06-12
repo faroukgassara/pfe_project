@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flappy_search_bar/flappy_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -8,7 +9,7 @@ import 'patients.dart';
 
 void main() {
   runApp(MaterialApp(
-    home: Patients(),
+    home: Home(),
     debugShowCheckedModeBanner: false,
   ));
 }
@@ -28,7 +29,7 @@ class _HomeState extends State<Home> {
     });
     _list.clear();
     final response =
-        await http.get("http://10.0.3.2:5000");
+        await http.get("http://10.0.3.2:5000/patient");
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
       setState(() {
@@ -50,7 +51,7 @@ class _HomeState extends State<Home> {
     }
 
     _list.forEach((f) { 
-      if (f.nom.contains(text) || f.prenom.contains(text))
+      if (f.nom.toLowerCase().contains(text) || f.prenom.toLowerCase().contains(text))
         _search.add(f);
     });
     setState(() {});
@@ -64,90 +65,10 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: Container(
-        child: Column(
-          children: <Widget>[
-            Container(
-              padding: EdgeInsets.all(10.0),
-              color: Colors.blue,
-              child: Card(
-                child: ListTile(
-                  leading: Icon(Icons.search),
-                  title: TextField(
-                    controller: controller,
-                    onChanged: onSearch,
-                    decoration: InputDecoration(
-                        hintText: "Search", border: InputBorder.none),
-                  ),
-                  trailing: IconButton(
-                    onPressed: () {
-                      controller.clear();
-                      onSearch('');
-                    },
-                    icon: Icon(Icons.cancel),
-                  ),
-                ),
-              ),
-            ),
-            loading
-                ? Center(
-                    child: CircularProgressIndicator(),
-                  )
-                : Expanded(
-                    child: _search.length != 0 || controller.text.isNotEmpty
-                        ? ListView.builder(
-                            itemCount: _search.length,
-                            itemBuilder: (context, i) {
-                              final b = _search[i];
-                              return Container(
-                                  padding: EdgeInsets.all(10.0),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                      Text(
-                                        b.nom,
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 18.0),
-                                      ),
-                                      SizedBox(
-                                        height: 4.0,
-                                      ),
-                                      Text(b.prenom),
-                                    ],
-                                  ));
-                            },
-                          )
-                        : ListView.builder(
-                            itemCount: _list.length,
-                            itemBuilder: (context, i) {
-                              final a = _list[i];
-                              return Container(
-                                  padding: EdgeInsets.all(10.0),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                      Text(
-                                        a.nom,
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 18.0),
-                                      ),
-                                      SizedBox(
-                                        height: 4.0,
-                                      ),
-                                      Text(a.prenom),
-                                      Text(a.sex),
-                                      Text((a.statusmatriomo_id).toString()),
-                                    ],
-                                  ));
-                            },
-                          ),
-                  ),
-          ],
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: SearchBar(),
         ),
       ),
     );
