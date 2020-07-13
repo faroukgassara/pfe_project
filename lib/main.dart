@@ -3,13 +3,16 @@ import 'dart:convert';
 import 'package:flappy_search_bar/flappy_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:pfe_project/check.dart';
 
+import 'chatpage.dart';
+import 'info.dart';
 import 'model.dart';
 import 'patients.dart';
 
 void main() {
   runApp(MaterialApp(
-    home: Home(),
+    home: Checkout(),
     debugShowCheckedModeBanner: false,
   ));
 }
@@ -28,8 +31,7 @@ class _HomeState extends State<Home> {
       loading = true;
     });
     _list.clear();
-    final response =
-        await http.get("http://10.0.3.2:5000/patient");
+    final response = await http.get("http://10.0.3.2:5000/patient");
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
       setState(() {
@@ -50,9 +52,9 @@ class _HomeState extends State<Home> {
       return;
     }
 
-    _list.forEach((f) { 
-      if (f.nom.toLowerCase().contains(text) || f.prenom.toLowerCase().contains(text))
-        _search.add(f);
+    _list.forEach((f) {
+      if (f.nom.toLowerCase().contains(text) ||
+          f.prenom.toLowerCase().contains(text)) _search.add(f);
     });
     setState(() {});
   }
@@ -62,6 +64,7 @@ class _HomeState extends State<Home> {
     super.initState();
     fetchData();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
